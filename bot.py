@@ -15,7 +15,7 @@ client = tweepy.Client(
     wait_on_rate_limit=True,
 )
 
-# 投稿候補を読み込み
+# 投稿候補の読み込み
 try:
     with open("content.csv", encoding="utf-8") as f:
         posts = [r[0].strip() for r in csv.reader(f) if r and r[0].strip()]
@@ -32,8 +32,6 @@ try:
     resp = client.create_tweet(text=text)
     print("posted:", text, "| id:", resp.data.get("id"))
 except tweepy.Forbidden as e:
-    print("Forbidden:", e)
-    sys.exit(1)
+    print("Forbidden:", e); sys.exit(1)
 except Exception as e:
-    print("post failed:", repr(e))
-    sys.exit(1)
+    print("post failed:", repr(e)); sys.exit(1)
